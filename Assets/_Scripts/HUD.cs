@@ -69,8 +69,9 @@ public class HUD : Singleton<HUD> {
             i.text = "Tries Left: " + m_manager.m_TriesLeft.ToString();
         }
         m_TimerText.text = "Time: " + m_timer.GetTimer().ToString();
-        if (m_timer.m_TimerStart && m_timer.GetTimer() <= 0) {
+        if (m_timer.m_TimerStart && (m_timer.GetTimer() <= 0 || m_manager.m_TriesLeft <= 0)) {
             m_timer.m_TimerStart = false;
+            m_Game.SetActive(false);
             SwitchCanvas(m_canvas[0]);
         }
     }

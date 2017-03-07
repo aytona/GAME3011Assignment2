@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		else if (Input.GetMouseButtonDown(1)) {
 			CheckIfCorrect();
+            m_manager.DecreaseTriesLeft();
 		}
 	}
 

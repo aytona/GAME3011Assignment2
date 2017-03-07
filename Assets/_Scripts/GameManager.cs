@@ -90,16 +90,20 @@ public class GameManager : Singleton<GameManager> {
         m_Tries++;
     }
 
+    public void DecreaseTriesLeft() {
+        m_TriesLeft--;
+    }
+
     public void FinishLevel() {
         switch((int)m_DifficultyLevel) {
             case 1:
-                AddFunds(100 + (m_Tries * 50));
+                AddFunds(100 + (m_TriesLeft * 50));
                 break;
             case 2:
-                AddFunds(300 + (m_Tries * 50));
+                AddFunds(300 + (m_TriesLeft * 50));
                 break;
             case 3:
-                AddFunds(750 + (m_Tries * 50));
+                AddFunds(750 + (m_TriesLeft * 50));
                 break;
         }
         var _hud = FindObjectOfType<HUD>();
