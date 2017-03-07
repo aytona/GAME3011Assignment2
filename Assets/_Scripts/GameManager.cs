@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
+    public List<Upgrades> m_Upgrades;
+
     private float m_DifficultyLevel;
     private float m_Funds;
-    private List<Upgrades> m_Upgrades;
 
     void Start() {
         m_Funds = 0;
@@ -22,12 +23,9 @@ public class GameManager : Singleton<GameManager> {
     public bool PurchaseUpgrade(string name) {
         foreach (Upgrades u in m_Upgrades) {
             if (u.m_Name == name) {
-                if (!u.m_Own) {
-                    if (m_Funds >= u.m_Cost) {
-                        u.m_Own = true;
-                        m_Funds -= u.m_Cost;
-                        return true;
-                    }
+                if (m_Funds >= u.m_Cost) {
+                    m_Funds -= u.m_Cost;
+                    return true;
                 }
             }
         }
@@ -39,8 +37,8 @@ public class GameManager : Singleton<GameManager> {
     }
 }
 
+[System.Serializable]
 public class Upgrades {
     public string m_Name;
     public float m_Cost;
-    public bool m_Own;
 }

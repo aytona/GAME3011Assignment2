@@ -59,7 +59,7 @@ public class HUD : Singleton<HUD> {
 
     public void Purchase(string name) {
         if (m_manager.PurchaseUpgrade(name)) {
-
+            m_manager.PurchaseUpgrade(name);
         } else {
 
         }
