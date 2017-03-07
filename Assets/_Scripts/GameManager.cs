@@ -11,11 +11,33 @@ public class GameManager : Singleton<GameManager> {
     public float m_Tries = 3;
     public string m_UpgradeBought = "";
 
+    public GameObject m_Unlock;
+
     public float m_TriesLeft;
 
     void Start() {
         m_Funds = 0;
         m_Tries = 3;
+    }
+
+    private void SetUnlockWidth(float difficulty) {
+        switch((int)difficulty) {
+            case 1:
+                m_Unlock.transform.localScale = new Vector2(6, 2);
+                break;
+            case 2:
+                m_Unlock.transform.localScale = new Vector2(4, 2);
+                break;
+            case 3:
+                m_Unlock.transform.localScale = new Vector2(2, 2);
+                break;
+            default:
+                m_Unlock.transform.localScale = new Vector2(4, 2);
+                break;
+        }
+        float halfScale = m_Unlock.transform.localScale.x / 2f;
+        float randomXPos = Random.Range(-10f + halfScale, 10f - halfScale);
+        m_Unlock.transform.position = new Vector3(randomXPos, 0, 0);
     }
 
     public float GetDifficultyLevel() {
@@ -24,6 +46,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void SetDifficultyLevel(float difficulty) {
         m_DifficultyLevel = difficulty;
+        SetUnlockWidth(m_DifficultyLevel);
     }
 
     public float GetFundsAmount() {
