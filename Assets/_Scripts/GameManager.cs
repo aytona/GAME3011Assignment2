@@ -7,9 +7,11 @@ public class GameManager : Singleton<GameManager> {
 
     private float m_DifficultyLevel;
     private float m_Funds;
+    private float m_width;
 
     void Start() {
         m_Funds = 0;
+
     }
 
     public float GetDifficultyLevel() {
@@ -34,6 +36,10 @@ public class GameManager : Singleton<GameManager> {
 
     public void AddFunds(float amount) {
         m_Funds += amount;
+    }
+
+    public void IncreaseWidth() {
+
     }
 }
 
