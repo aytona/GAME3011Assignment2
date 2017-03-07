@@ -49,10 +49,10 @@ public class PlayerMovement : MonoBehaviour {
 	void ShowDirection(bool direction) {
 		if (direction) {
 			GameObject arrow = Instantiate(m_Arrow, new Vector3(transform.position.x, transform.position.y + 3f), Quaternion.Euler(0, 0, -90));
-			Destroy(arrow, 2f);
+			Destroy(arrow, 0.5f);
 		} else {
 			GameObject arrow = Instantiate(m_Arrow, new Vector3(transform.position.x, transform.position.y + 3f), Quaternion.Euler(0, 0, 90f));
-			Destroy(arrow, 2f);
+			Destroy(arrow, 0.5f);
 		}
 	}
 }
