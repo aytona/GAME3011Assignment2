@@ -5,13 +5,20 @@ using UnityEngine;
 public class Timer : MonoBehaviour {
 
 	private float m_Timer = 0;
+    public bool m_TimerStart;
 
 	public void StartTimer() {
 		m_Timer = 60;
-		StartCoroutine(UpdateTime());
+        m_TimerStart = true;
 	}
 
-	public float GetTimer() {
+    private void Update() {
+        if (m_TimerStart) {
+            m_Timer -= Time.deltaTime;
+        }
+    }
+
+    public float GetTimer() {
 		return m_Timer;
 	}
 

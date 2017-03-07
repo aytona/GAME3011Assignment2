@@ -9,12 +9,14 @@ public class HUD : Singleton<HUD> {
     public Text[] m_FundsText;
     public Text[] m_Tries;
     public Text[] m_Reward;
+    public Text m_TimerText;
     public GameObject m_Game;
     public GameObject m_Unlock;
 
     private GameManager m_manager;
     private List<GameObject> m_canvas;
     private GameObject m_prevCanvas;
+    private Timer m_timer;
 
     void OnEnable() {
         m_manager = FindObjectOfType<GameManager>();
@@ -22,6 +24,7 @@ public class HUD : Singleton<HUD> {
         for (int i = 0; i < gameObject.transform.childCount; i++) {
             m_canvas.Add(gameObject.transform.GetChild(i).gameObject);
         }
+        m_timer = FindObjectOfType<Timer>();
     }
 
     void Update() {
@@ -65,6 +68,11 @@ public class HUD : Singleton<HUD> {
         foreach(Text i in m_Tries) {
             i.text = "Tries Left: " + m_manager.m_TriesLeft.ToString();
         }
+        m_TimerText.text = "Time: " + m_timer.GetTimer().ToString();
+        if (m_timer.m_TimerStart && m_timer.GetTimer() <= 0) {
+            m_timer.m_TimerStart = false;
+            SwitchCanvas(m_canvas[0]);
+        }
     }
 
     public void PlayGame(GameObject _canvas) {
@@ -79,6 +87,7 @@ public class HUD : Singleton<HUD> {
     public void StartGame() {
         m_Game.SetActive(true);
         m_manager.m_TriesLeft = m_manager.m_Tries;
+        m_timer.StartTimer();
     }
 
     public void BackToMenu(GameObject _canvas) {
