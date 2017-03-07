@@ -10,6 +10,7 @@ public class HUD : Singleton<HUD> {
     public Text[] m_Tries;
     public Text[] m_Reward;
     public GameObject m_Game;
+    public GameObject m_Unlock;
 
     private GameManager m_manager;
     private List<GameObject> m_canvas;
@@ -68,6 +69,14 @@ public class HUD : Singleton<HUD> {
 
     public void PlayGame(GameObject _canvas) {
         SwitchCanvas(_canvas);
+    }
+
+    public void FinishGame() {
+        m_Game.SetActive(false);
+        SwitchCanvas(m_Unlock);
+    }
+
+    public void StartGame() {
         m_Game.SetActive(true);
         m_manager.m_TriesLeft = m_manager.m_Tries;
     }

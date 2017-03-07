@@ -6,17 +6,22 @@ public class PlayerMovement : MonoBehaviour {
 
 	public GameObject m_Unlock;
 	public GameObject m_Arrow;
+    public bool m_AllowMovement;
 
     private GameManager m_manager;
 
+    public void Movement(bool allow) {
+        m_AllowMovement = allow;
+    }
 
     private void Start() {
         m_manager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0) && m_AllowMovement) {
             gameObject.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, 0, 0);
+            m_Arrow.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2);
 		}
 		else if (Input.GetMouseButtonDown(1)) {
 			CheckIfCorrect();

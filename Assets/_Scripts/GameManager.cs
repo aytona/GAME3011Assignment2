@@ -79,7 +79,10 @@ public class GameManager : Singleton<GameManager> {
                 AddFunds(750 + (m_Tries * 50));
                 break;
         }
-        
+        var _hud = FindObjectOfType<HUD>();
+        if (_hud) {
+            _hud.FinishGame();
+        }
     }
 }
 
